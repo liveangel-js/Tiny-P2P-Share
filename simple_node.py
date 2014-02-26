@@ -27,7 +27,7 @@ class Node:
     def query(self,query,history=[]):
         code,data=self._handle(query)
         if code==OK:
-            return code
+            return code,data
         else:
             history = history + [self.url]
             if len(history) >=MAX_HISTORY_LENGTH:
@@ -64,13 +64,14 @@ class Node:
     def _handle(self,query):
         dir=self.dirname
         name=join(dir,query)
+        print name
         if not isfile(name): return FAIL,EMPTY
         return OK,open(name).read()
 
     def _broadcast(self,query,history):
         """
         """
-        for other in self.knonw.copy():
+        for other in self.known.copy():
             if other in history:continue
             try:
                 s=ServerProxy(other)
