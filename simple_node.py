@@ -43,6 +43,8 @@ class Node:
         """
         find and download file
         """
+        print 'myself secret % s' %self.secret
+        print 'input secret %s' %secret
         if secret != self.secret: return FAIL
         code,data = self.query(query)
         if code==OK:
